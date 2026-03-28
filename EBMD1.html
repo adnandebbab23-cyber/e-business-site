@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Business & Marketing Digital - Semestre 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Reset & Base */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Roboto',sans-serif; }
+body { line-height:1.6; color:#eee; background:#0d1f33; scroll-behavior:smooth; }
+a { text-decoration:none; color:inherit; }
+
+/* Header */
+header { background:#003366; color:#fff; position:sticky; top:0; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,0.5); }
+header nav { display:flex; justify-content:space-around; align-items:center; max-width:1200px; margin:auto; padding:15px 0; }
+header nav a { color:#fff; font-weight:bold; transition:0.3s; }
+header nav a:hover { color:#00aaff; }
+
+/* Hero Section */
+.hero { position:relative; height:80vh; display:flex; justify-content:center; align-items:center; text-align:center; overflow:hidden; }
+.hero video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; opacity:0.6; }
+.hero .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1; }
+.hero-content { position:relative; z-index:2; }
+.hero-content h1 { font-size:3rem; margin-bottom:20px; color:#00aaff; animation:fadeInDown 1s ease forwards; }
+.hero-content p { font-size:1.5rem; margin-bottom:30px; color:#fff; animation:fadeInUp 1s ease forwards; }
+.hero-content button { background:#0055aa; border:none; padding:15px 30px; font-size:1rem; border-radius:50px; color:#fff; font-weight:bold; transition:0.3s; animation:fadeInUp 1.2s ease forwards; }
+.hero-content button:hover { transform:scale(1.05); background:#0077dd; }
+
+/* Sections */
+section { padding:80px 20px; max-width:1200px; margin:auto; }
+section h2 { text-align:center; margin-bottom:50px; font-size:2.5rem; color:#00aaff; position:relative; }
+section h2::after { content:""; display:block; width:60px; height:4px; background:#00aaff; margin:10px auto 0; border-radius:2px; }
+
+/* Animations */
+@keyframes fadeInDown { 0% {opacity:0; transform:translateY(-30px);} 100% {opacity:1; transform:translateY(0);} }
+@keyframes fadeInUp { 0% {opacity:0; transform:translateY(30px);} 100% {opacity:1; transform:translateY(0);} }
+
+/* Modules */
+.modules { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; }
+.module-card { background:#112244; padding:25px; border-radius:15px; box-shadow:0 6px 15px rgba(0,0,0,0.6); transform:translateY(30px); opacity:0; transition:0.5s; }
+.module-card h3 { color:#00aaff; margin-bottom:15px; }
+.module-card p { color:#ccc; }
+.module-card:hover { transform:translateY(-10px) scale(1.05); box-shadow:0 12px 25px rgba(0,0,0,0.8); }
+
+/* Practical Training */
+.practical-list { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.practical-card { background:#0055aa; color:#fff; padding:25px; border-radius:15px; flex:1 1 200px; text-align:center; transition:0.3s; }
+.practical-card:hover { background:#0077dd; transform:scale(1.05); }
+
+/* Knowledge */
+.knowledge { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
+.knowledge-card { background:#112244; padding:25px; border-radius:15px; box-shadow:0 6px 15px rgba(0,0,0,0.6); transition:0.3s; text-align:center; }
+.knowledge-card:hover { transform:translateY(-10px) scale(1.03); }
+
+/* Faculty */
+.faculty { display:flex; flex-wrap:wrap; gap:25px; justify-content:center; }
+.faculty-card { background:#003366; padding:20px; border-radius:15px; width:200px; text-align:center; box-shadow:0 6px 15px rgba(0,0,0,0.6); transition:0.3s; }
+.faculty-card:hover { transform:translateY(-10px) scale(1.05); }
+
+/* Testimonials */
+.testimonials { background:#001f33; color:#fff; padding:60px 20px; border-radius:15px; margin-top:50px; }
+.testimonial-slider { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:20px; padding-bottom:10px; }
+.testimonial-slide { min-width:300px; background:#003366; color:#fff; padding:20px; border-radius:15px; scroll-snap-align:center; flex-shrink:0; box-shadow:0 6px 15px rgba(0,0,0,0.6); }
+.testimonial-slide p { font-style:italic; margin-bottom:10px; color:#ccc; }
+.testimonial-slide h4 { color:#00aaff; text-align:right; }
+
+/* Stages carousel */
+.stages { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:20px; padding-bottom:10px; }
+.stage-card { min-width:250px; background:#0055aa; color:#fff; padding:20px; border-radius:15px; scroll-snap-align:center; flex-shrink:0; font-weight:bold; box-shadow:0 6px 15px rgba(0,0,0,0.6); transition:0.3s; }
+.stage-card:hover { background:#0077dd; transform:scale(1.05); }
+
+/* Contact */
+.contact-form { max-width:600px; margin:auto; display:flex; flex-direction:column; gap:15px; }
+.contact-form input, .contact-form textarea { padding:15px; border:1px solid #555; border-radius:10px; background:#112244; color:#fff; }
+.contact-form button { background:#0055aa; color:#fff; border:none; padding:15px; border-radius:50px; font-weight:bold; transition:0.3s; }
+.contact-form button:hover { background:#0077dd; transform:scale(1.05); }
+
+/* Footer */
+footer { background:#003366; color:#fff; text-align:center; padding:25px 0; margin-top:40px; }
+
+/* Signature flottante */
+.signature { position: fixed; bottom: 10px; right: 10px; font-family:'Cursive',sans-serif; font-size:18px; color:#00aaff; opacity:0.7; pointer-events:none; z-index:9999; transition:opacity 0.3s; }
+.signature:hover { opacity:1; }
+
+/* Responsive */
+@media(max-width:768px) {
+.hero-content h1 { font-size:2.2rem; }
+.hero-content p { font-size:1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav>
+<a href="#home">Accueil</a>
+<a href="#programme">Programme</a>
+<a href="#practical">Formation pratique</a>
+<a href="#knowledge">Connaissances</a>
+<a href="#faculty">Équipe</a>
+<a href="#testimonials">Témoignages</a>
+<a href="#stages">Stages</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+<video autoplay muted loop>
+  <source src="https://example.com/faculte_errachidia_presentation.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+<div class="hero-content">
+<h1>E-Business & Marketing Digital</h1>
+<p>Filière Semestre 5 - Faculté Polydisciplinaire Errachidia</p>
+<button onclick="document.getElementById('programme').scrollIntoView({behavior:'smooth'})">En savoir plus</button>
+</div>
+</section>
+
+<!-- Programme Section -->
+<section id="programme">
+<h2>Programme – Semestre 5</h2>
+<div class="modules">
+<div class="module-card"><h3>E-commerce</h3><p>Techniques de vente en ligne et gestion des plateformes e-commerce.</p></div>
+<div class="module-card"><h3>Stratégie digitale</h3><p>Élaboration des stratégies marketing sur les canaux digitaux.</p></div>
+<div class="module-card"><h3>Distribution & Merchandising</h3><p>Gestion des produits et optimisation de leur présentation à l’ère digitale.</p></div>
+<div class="module-card"><h3>Langues étrangères</h3><p>Développement des compétences linguistiques professionnelles.</p></div>
+<div class="module-card"><h3>Système de gestion de contenu</h3><p>Création et gestion de sites web via CMS.</p></div>
+<div class="module-card"><h3>Marketing stratégique & opérationnel</h3><p>Analyse des marchés et mise en place d’actions marketing.</p></div>
+<div class="module-card"><h3>Recherche commerciale & étude de marché</h3><p>Analyse des besoins clients et collecte de données.</p></div>
+</div>
+</section>
+
+<!-- Practical Training Section -->
+<section id="practical">
+<h2>Formation pratique</h2>
+<div class="practical-list">
+<div class="practical-card">Création de sites web</div>
+<div class="practical-card">Campagnes marketing</div>
+<div class="practical-card">Études de cas</div>
+<div class="practical-card">Mise en situation : autonomie & esprit d’équipe</div>
+</div>
+<p style="text-align:center; margin-top:20px;">La formation dépasse la théorie pour préparer aux challenges réels du digital.</p>
+</section>
+
+<!-- Knowledge Section -->
+<section id="knowledge">
+<h2>Connaissances acquises</h2>
+<div class="knowledge">
+<div class="knowledge-card">Marketing digital : stratégies de communication, visibilité et promotion en ligne.</div>
+<div class="knowledge-card">E-commerce : fonctionnement de la vente en ligne et gestion des activités digitales.</div>
+<div class="knowledge-card">Recherche commerciale : analyse du marché, étude des comportements clients.</div>
+<div class="knowledge-card">Gestion de contenu : création et valorisation du contenu digital.</div>
+</div>
+</section>
+
+<!-- Faculty Section -->
+<section id="faculty">
+<h2>Équipe pédagogique</h2>
+<div class="faculty">
+<div class="faculty-card">Youness Debnichi</div>
+<div class="faculty-card">Saad Benchekroun</div>
+<div class="faculty-card">Fatiha Elagri</div>
+<div class="faculty-card">Elhanafi Mounir</div>
+<div class="faculty-card">Youssef Ferhaoui</div>
+<div class="faculty-card">Abdelhaq Ennoujoum</div>
+</div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+<h2>Témoignages étudiants</h2>
+<div class="testimonial-slider">
+<div class="testimonial-slide"><p>"Formation très enrichissante et pratique."</p><h4>- Sarah L.</h4></div>
+<div class="testimonial-slide"><p>"J'ai acquis de vraies compétences pour le digital."</p><h4>- Ahmed K.</h4></div>
+<div class="testimonial-slide"><p>"Excellente équipe pédagogique et projets concrets."</p><h4>- Leila M.</h4></div>
+</div>
+</section>
+
+<!-- Stages Section -->
+<section id="stages">
+<h2>Stages & Offres professionnelles</h2>
+<div class="stages">
+<div class="stage-card">Marketing Digital - Casablanca</div>
+<div class="stage-card">E-commerce Manager - Rabat</div>
+<div class="stage-card">Community Manager - Marrakech</div>
+<div class="stage-card">Assistant SEO - Fès</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+<h2>Contact</h2>
+<form class="contact-form">
+<input type="text" placeholder="Nom" required>
+<input type="email" placeholder="Email" required>
+<textarea rows="5" placeholder="Message" required></textarea>
+<button type="submit">Envoyer</button>
+</form>
+</section>
+
+<!-- Footer -->
+<footer>
+&copy; 2026 Faculté Polydisciplinaire Errachidia - Tous droits réservés
+</footer>
+
+<!-- Signature flottante -->
+<div class="signature">DEBBAB ADNANE</div>
+
+<script>
+// Scroll animations
+const cards = document.querySelectorAll('.module-card, .practical-card, .knowledge-card, .faculty-card');
+window.addEventListener('scroll', () => {
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 100) {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }
+  });
+});
+</script>
+</body>
+</html>
